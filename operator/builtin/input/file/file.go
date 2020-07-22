@@ -394,10 +394,15 @@ func (f *InputOperator) drainMessages() {
 
 	for {
 		select {
-		case <-done:
-			return
 		case message := <-f.fileUpdateChan:
 			f.updateFile(message)
+		default:
+		}
+
+		select {
+		case <-done:
+			return
+		default:
 		}
 	}
 }

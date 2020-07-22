@@ -580,6 +580,7 @@ func TestFileSource_FileMovedWhileOff_BigFiles(t *testing.T) {
 	require.NoError(t, err)
 
 	waitForMessage(t, logReceived, log1)
+	time.Sleep(50 * time.Millisecond)
 
 	// Stop the source, then rename and write a new log
 	err = source.Stop()
